@@ -117,7 +117,10 @@ create_oauth_token <- function(){
   }
 
 
-  endpoint <- oauth_endpoint("facebook")
+  endpoint <- oauth_endpoint(
+    authorize = "https://www.facebook.com/dialog/oauth",
+    access = "https://graph.facebook.com/oauth/access_token"
+  )
 
 
   client_id <- getOption("FacebookR.client_id", "")
