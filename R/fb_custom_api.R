@@ -23,17 +23,22 @@ fb_custom_api <- function(request, method="GET", api_version="v10.0", body=NULL)
   }
 
   request <- gsub("^\\/", "", request)
+  request <- paste0(
+    request,
+    ifelse(grepl("\\?", request), "&", "?"),
+    "access_token=", FacebookAuth$public_fields$token$credentials$access_token
+  )
   api_version <- gsub("\\/", "", api_version)
   
   url <- paste0("https://graph.facebook.com/", api_version, "/", request)
   tryCatch({
     data <- content(get(method)(
       url = url,
-      add_headers(
-        .headers = c(
-          "Authorization" = FacebookAuth$public_fields$token$credentials$access_token
-        )
-      ),
+      #add_headers(
+      #  .headers = c(
+      #    "Authorization" = FacebookAuth$public_fields$token$credentials$access_token
+      #  )
+      #),
       body = body,
       encode = "json"
     ))
