@@ -4,3 +4,5 @@ By using this package you accept that the authorization of Facebook API will be 
 You consent to only use this package in order to collect data that you have permission to store locally. If you are downloading data on behalf of a client or similar, you have to have a valid consent from that party.
 
 All usage of this package comes at your own risk. Some functions might not work for you.
+
+OBS! You will have to create your own Facebook Development application to get a client key and secret.
