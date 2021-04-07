@@ -13,7 +13,7 @@
 #' @export
 #' @examples
 #' fb_custom_api(request, method="GET", api_version="10.0")
-fb_custom_api <- function(request, method="GET", api_version="10.0", body=NULL){
+fb_custom_api <- function(request, method="GET", api_version="v10.0", body=NULL){
   if(!fb_check_existing_token()){
     tryCatch({
       fb_auth()
@@ -22,7 +22,10 @@ fb_custom_api <- function(request, method="GET", api_version="10.0", body=NULL){
     })
   }
 
-  url <- paste0("https://graph.facebook.com/", api_version, "/", request)
+  request <- gsub("^\\/", "", request)
+  api_version <- gsub("\\/", "", api_version)
+  
+  url <- paste0("https://graph.facebook.com/", api_version, "/", request))
   tryCatch({
     data <- content(get(method)(
       url = url,
