@@ -25,7 +25,7 @@ fb_custom_api <- function(request, method="GET", api_version="v10.0", body=NULL)
   request <- gsub("^\\/", "", request)
   api_version <- gsub("\\/", "", api_version)
   
-  url <- paste0("https://graph.facebook.com/", api_version, "/", request))
+  url <- paste0("https://graph.facebook.com/", api_version, "/", request)
   tryCatch({
     data <- content(get(method)(
       url = url,

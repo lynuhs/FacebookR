@@ -4,7 +4,7 @@
 \alias{fb_custom_api}
 \title{Get custom API request string}
 \usage{
-fb_custom_api(request, method = "GET", api_version = "10.0", body = NULL)
+fb_custom_api(request, method = "GET", api_version = "v10.0", body = NULL)
 }
 \arguments{
 \item{request}{A Custom request path for the API}
