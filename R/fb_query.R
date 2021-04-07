@@ -1,16 +1,19 @@
 #' Get custom API request string
 #'
-#' Query Facebook API with json encoded string
+#' Custom request to the Facebook API with json encoded string
 #'
-#' @param query Query parameters for the Graph API
+#' @param request A Custom request path for the API
+#' @param method The request method
+#' @param api_version The version of the API to use
+#' @param body What to include in the request body
 #'
 #' @import httr
 #'
 #'
 #' @export
 #' @examples
-#' fb_query("{me{name, id}}")
-fb_query <- function(query){
+#' fb_custom_api(request, method="GET", api_version="10.0")
+fb_custom_api <- function(request, method="GET", api_version="10.0", body=NULL){
   if(!fb_check_existing_token()){
     tryCatch({
       fb_auth()
@@ -19,18 +22,16 @@ fb_query <- function(query){
     })
   }
 
-  url <- paste0("https://graph.facebook.com/")
+  url <- paste0("https://graph.facebook.com/", api_version, "/", request)
   tryCatch({
-    data <- content(POST(
+    data <- content(get(method)(
       url = url,
       add_headers(
         .headers = c(
           "Authorization" = FacebookAuth$public_fields$token$credentials$access_token
         )
       ),
-      body = list(
-        query = query
-      ),
+      body = body,
       encode = "json"
     ))
 

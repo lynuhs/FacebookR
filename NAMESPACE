@@ -3,7 +3,7 @@
 export(FacebookAuth)
 export(fb_auth)
 export(fb_check_existing_token)
-export(fb_query)
+export(fb_custom_api)
 import(assertthat)
 import(httpuv)
 import(httr)
